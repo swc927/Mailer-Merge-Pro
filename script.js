@@ -613,8 +613,10 @@ async function exportAllLettersToPDFInChunks(batchSize = 500) {
 
     const imageData = canvas.toDataURL("image/jpeg");
 
-    pdf.addImage(imageData, "JPEG", 0, 0, 595, 842);
-    document.body.removeChild(container);
+    if (currentBatchCount > 0) {
+    pdf.addPage();
+    }
+    pdf.addImage(imageData, "JPEG", 0, 0, 595, 842);    document.body.removeChild(container);
     totalPagesSaved++;
     currentBatchCount++;
     updateProgressBar(progressBar, i + 1, total);
