@@ -1,8 +1,69 @@
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: #f5f5f5;
-  color: #333;
+  background: linear-gradient(to right, #1f1c2c, #928dab);
+  color: #f8f9fa;
+}
+
+h1.title {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffe082;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.instruction-manual {
+  background: #2e2e48;
+  padding: 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  font-family: "JetBrains Mono", monospace;
+  margin-bottom: 40px;
+  color: #f8f9fa;
+}
+
+.instruction-manual h2 {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  color: #ffca28;
+  margin-top: 0;
+  transition: color 0.3s ease;
+}
+
+.instruction-manual h2::after {
+  content: "▸";
+  font-size: 14px;
+  transform-origin: center;
+  position: absolute;
+  right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.instruction-manual h2.open::after {
+  transform: rotate(90deg);
+}
+
+.instruction-manual .instruction-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.instruction-manual h2.open + .instruction-content {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.instruction-manual p:hover {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 10px;
+  border-left: 3px solid #00bcd4;
+  transition: all 0.3s ease;
 }
 
 h1,
@@ -17,7 +78,8 @@ label {
 }
 
 .card {
-  background: #fff;
+  background: #1f1f2e;
+  color: #e0e0e0;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -25,6 +87,7 @@ label {
 }
 
 label {
+  color: #c7d4ff;
   display: block;
   margin-top: 20px;
   font-size: 14px;
@@ -37,6 +100,19 @@ input[type="file"] {
   border-radius: 6px;
   font-size: 14px;
   box-sizing: border-box;
+}
+
+input[type="file"],
+input[type="range"],
+select {
+  background-color: #3c3c4e;
+  color: #fff;
+  border: 1px solid #555;
+  font-family: "JetBrains Mono", monospace;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background: #00bcd4;
 }
 
 .layout-controls {
@@ -64,9 +140,12 @@ input[type="file"] {
 }
 
 button {
-  background-color: #b54c59;
+  background-color: #00bcd4;
   border: none;
   color: white;
+  font-weight: bold;
+  font-family: "JetBrains Mono", monospace;
+  transition: background 0.3s;
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 6px;
@@ -74,10 +153,12 @@ button {
 }
 
 button:hover {
-  background-color: #993c48;
+  background-color: #0097a7;
 }
 
 .output-section {
+  background: #12121c;
+  border-radius: 10px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -142,15 +223,17 @@ button:hover {
 .letter-summary {
   font-size: 18px;
   font-weight: bold;
-  color: #004085;
-  background: #e2e6ea;
+  color: #ffffff;
+  background: #1b1b2f;
   padding: 10px;
   margin-top: 20px;
   margin-bottom: 10px;
-  border-left: 6px solid #007bff;
+  border-left: 4px solid #00bcd4;
 }
 
 #summaryBox {
+  background: #1f1f2e;
+  border-radius: 10px;
   margin-top: 20px;
   overflow: hidden;
 }
@@ -176,6 +259,9 @@ button:hover {
 
 .right-panel h3 {
   margin-top: 0;
+  color: #ffd54f;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .left-panel label,
@@ -202,6 +288,11 @@ button:nth-child(4) {
   background-color: #f5f5f5;
   color: #333;
   border: 1px solid #ccc;
+}
+
+select,
+input[type="range"] {
+  margin-top: 8px;
 }
 
 @media (max-width: 700px) {
