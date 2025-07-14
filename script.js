@@ -296,19 +296,22 @@ function renderLetter(row, i) {
 
   const container = document.createElement("div");
 
-  const bgImg = document.createElement("img");
-  bgImg.src = backgroundImage;
-  bgImg.crossOrigin = "anonymous";
-  Object.assign(bgImg.style, {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    zIndex: 0,
-    objectFit: "cover",
-  });
-  container.appendChild(bgImg);
+  const showBg = document.getElementById("toggleBackground")?.checked;
+  if (showBg) {
+    const bgImg = document.createElement("img");
+    bgImg.src = backgroundImage;
+    bgImg.crossOrigin = "anonymous";
+    Object.assign(bgImg.style, {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      zIndex: 0,
+      objectFit: "cover",
+    });
+    container.appendChild(bgImg);
+  }
 
   container.className = "page";
 
@@ -540,19 +543,22 @@ async function exportAllLettersToPDFInChunks(batchSize = 500) {
       )
       .map((line, idx) => (idx === 0 || idx === 1 ? line : line.toUpperCase()));
 
-    const bgImg = document.createElement("img");
-    bgImg.src = backgroundImage;
-    bgImg.crossOrigin = "anonymous";
-    Object.assign(bgImg.style, {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      zIndex: 0,
-      objectFit: "cover",
-    });
-    container.appendChild(bgImg);
+    const showBg = document.getElementById("toggleBackground")?.checked;
+    if (showBg) {
+      const bgImg = document.createElement("img");
+      bgImg.src = backgroundImage;
+      bgImg.crossOrigin = "anonymous";
+      Object.assign(bgImg.style, {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: 0,
+        objectFit: "cover",
+      });
+      container.appendChild(bgImg);
+    }
 
     const textDiv = document.createElement("div");
     textDiv.className = "text-block";
@@ -614,9 +620,10 @@ async function exportAllLettersToPDFInChunks(batchSize = 500) {
     const imageData = canvas.toDataURL("image/jpeg");
 
     if (currentBatchCount > 0) {
-    pdf.addPage();
+      pdf.addPage();
     }
-    pdf.addImage(imageData, "JPEG", 0, 0, 595, 842);    document.body.removeChild(container);
+    pdf.addImage(imageData, "JPEG", 0, 0, 595, 842);
+    document.body.removeChild(container);
     totalPagesSaved++;
     currentBatchCount++;
     updateProgressBar(progressBar, i + 1, total);
